@@ -1,0 +1,84 @@
+###############################################################################
+# jQuery Pager Plugin                                                         #
+# @author Kirk Holder                                                         #
+#                                                                             #
+# Copyright (c) 2012 Kirk Holder                                              #
+#                                                                             #
+# Permission is hereby granted, free of charge, to any person obtaining       #
+# a copy of this software and associated documentation files                  #
+# (the "Software"), to deal in the Software without restriction, including    #
+# without limitation the rights to use, copy, modify, merge, publish,         #
+# distribute, sublicense, and/or sell copies of the Software, and to permit   #
+# persons to whom the Software is furnished to do so, subject to the          #
+# following conditions:                                                       #
+#                                                                             #
+# The above copyright notice and this permission notice shall be included     #
+# in all copies or substantial portions of the Software.                      #
+#                                                                             #
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS     #
+# OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, #
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE #
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER      #
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING     #
+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         #
+# DEALINGS IN THE SOFTWARE.                                                   #
+###############################################################################
+
+-------------------------------------------------------------------------------
+|  WHAT IS IT?                                                                |
+-------------------------------------------------------------------------------
+jQuery Pager Plugin is an easy to use pagination jQuery plugin that displays 
+HtmlElements (div, ul, ol, table, etc.) in a limited number of results with 
+history support via hash and stylable navigation elements via CSS.
+
+-------------------------------------------------------------------------------
+| HOW TO USE IT?                                                              |
+-------------------------------------------------------------------------------
+1) Include jQuery *either in the HEAD or bottom of BODY.
+   eg: <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+
+2) Include pager plugin *either in the HEAD or bottom of BODY.
+   eg: <script type="text/javascript" src="jquery.pager.min.js"></script>
+
+3) Create some content to paginate in BODY.
+   eg: <div id="example">
+         <p>Page one</p>
+         <p>Page two</p>
+         <p>Page three</p>
+         <p>Page four</p>
+         <p>Page five</p>
+         <p>Page six</p>
+       </div>
+
+4) Initiate the pager when the document is ready. Exepcts parent element.
+   *either in the HEAD or bottom of BODY.
+   eg: <script type="text/javascript">
+         $(function () {
+           $('#example').pager({display: 3, location: 'after'});
+         });
+       </script>
+
+-------------------------------------------------------------------------------
+| HOW TO CUSTOMIZE IT?                                                        |
+-------------------------------------------------------------------------------
+When initiating the pager you may override the default options
+   (number) display 
+                How many content elements are visible per page. 
+                The default is 10.
+
+   (number) navMax
+                Maximum number of navigational elements to display-
+                not including Prev, Next, First and Last number value.
+                The default is 5.
+
+   (string) location
+                Navigational elements location relative to paginated content.
+                'before', 'after', or 'both' are acceptable values.
+                The default is 'before'.
+
+No inline CSS is applied to the navigational elements, but you may use
+the classes in the example below to get you started
+    ul.pager { list-style: none; }
+    ul.pager > li { float: left; margin: 0 0.5em 0.5em 0; }
+    ul.pager > li.item.disable { display: none; }
+    ul.pager > li > a.active { color: white; background: blue; }
