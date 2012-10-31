@@ -1,24 +1,8 @@
 /**
  * jQuery "pager" plug-in for pagination
  * @author Kirk Holder
- * 
- * Copyright (c) 2012 Kirk Holder
- * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy 
- * of this software and associated documentation files (the "Software"), to deal 
- * in the Software without restriction, including without limitation the rights 
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies 
- * of the Software, and to permit persons to whom the Software is furnished to do so, 
- * subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in all copies 
- * or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE 
- * AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, 
- * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * Copyright (c) 2012 Kirk Holder 
+ * released under MIT license
  */
 (function ($) {
     "use strict";
@@ -27,7 +11,8 @@
                 display: 10,
                 navMax: 5,
                 location: 'before',
-                index: 0
+                index: 0,
+                useHash: false
             },
             nav = {
                 total: 0,
@@ -35,6 +20,7 @@
                 name: 'pager',
                 active: 'active'
             },
+            page = 1,
             config = $.extend(defaults, options),
             el = $(this).children(), rel = '', loc = '',
             total = 0, max = 0, index = 0, min = 0, n = 0, radix = 10,
@@ -42,7 +28,7 @@
                 return arg.replace(/\D/g, '');
             },
             getHash = function () {
-                return window.location.hash;
+                return (config.useHash) ? window.location.hash : page;
             },
             goTo = function (index) {
                 min = Math.min(index * config.display, total);
@@ -69,7 +55,10 @@
                         }
                     });
                 }
-                window.location.hash = n;
+                page = n;
+                if (config.useHash) {
+                    window.location.hash = page;
+                }
             };
         
         index = (getHash().length === 0) ? config.index : parseInt(getDigits(getHash()), radix) - 1;
@@ -114,10 +103,12 @@
                 });
             });
         }
-        window.onhashchange = function () {
-            n = parseInt(getDigits(getHash()), radix) - 1;
-            goTo(n);
-        };
+        if (config.useHash) {
+            window.onhashchange = function () {
+                n = parseInt(getDigits(getHash()), radix) - 1;
+                goTo(n);
+            };
+        }
         goTo(index);
         return this;
     };

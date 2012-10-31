@@ -75,6 +75,9 @@ When initiating the pager you may override the default options
                 Navigational elements location relative to paginated content.
                 'before', 'after', or 'both' are acceptable values.
                 The default is 'before'.
+    (bool)  useHash
+                Determines whether or not to use the browser hash.
+                The default is false.
 
 No inline CSS is applied to the navigational elements, but you may use
 the classes in the example below to get you started
